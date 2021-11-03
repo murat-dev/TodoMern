@@ -32,13 +32,15 @@ const AddList = ({ colors, onAdd }) => {
       return;
     }
     setIsLoading(true);
+    console.log(inputValue);
     axios
-      .post('http://localhost:3001/lists', {
+      .post("https://todo-back-node.herokuapp.com/api/list", {
         name: inputValue,
         colorId: seletedColor
       })
       .then(({ data }) => {
         const color = colors.filter(c => c.id === seletedColor)[0];
+        console.log(data);
         const listObj = { ...data, color, tasks: [] };
         onAdd(listObj);
         onClose();
