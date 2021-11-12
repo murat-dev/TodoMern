@@ -1,34 +1,33 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 
-import addSvg from '../../assets/img/add.svg';
+import addSvg from "../../assets/img/add.svg";
 
 const AddTaskForm = ({ list, onAddTask }) => {
   const [visibleForm, setFormVisible] = useState(false);
-  const [inputValue, setInputValue] = useState('');
-  const [isLoading, setIsLoading] = useState('');
+  const [inputValue, setInputValue] = useState("");
+  const [isLoading, setIsLoading] = useState("");
 
   const toggleFormVisible = () => {
     setFormVisible(!visibleForm);
-    setInputValue('');
+    setInputValue("");
   };
 
   const addTask = () => {
     const obj = {
       listId: list.id,
       text: inputValue,
-      completed: false
+      completed: false,
     };
     setIsLoading(true);
-    console.log(obj);
     axios
-      .post('https://todo-back-node.herokuapp.com/api/task', obj)
+      .post("https://todo-back-node.herokuapp.com/api/task", obj)
       .then(({ data }) => {
         onAddTask(list.id, data);
         toggleFormVisible();
       })
-      .catch(e => {
-        alert('Ошибка при добавлении задачи!');
+      .catch((e) => {
+        alert("Ошибка при добавлении задачи!");
       })
       .finally(() => {
         setIsLoading(false);
@@ -49,10 +48,10 @@ const AddTaskForm = ({ list, onAddTask }) => {
             className="field"
             type="text"
             placeholder="Текст задачи"
-            onChange={e => setInputValue(e.target.value)}
+            onChange={(e) => setInputValue(e.target.value)}
           />
           <button disabled={isLoading} onClick={addTask} className="button">
-            {isLoading ? 'Добавление...' : 'Добавить задачу'}
+            {isLoading ? "Добавление..." : "Добавить задачу"}
           </button>
           <button onClick={toggleFormVisible} className="button button--grey">
             Отмена

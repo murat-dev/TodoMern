@@ -1,13 +1,13 @@
-import React from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import React from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
-import editSvg from '../../assets/img/edit.svg';
+import editSvg from "../../assets/img/edit.svg";
 
-import './Tasks.scss';
+import "./Tasks.scss";
 
-import AddTaskForm from './AddTaskForm';
-import Task from './Task';
+import AddTaskForm from "./AddTaskForm";
+import Task from "./Task";
 
 const Tasks = ({
   list,
@@ -16,19 +16,18 @@ const Tasks = ({
   onRemoveTask,
   onEditTask,
   onCompleteTask,
-  withoutEmpty
+  withoutEmpty,
 }) => {
   const editTitle = () => {
-    const newTitle = window.prompt('Название списка', list.name);
+    const newTitle = window.prompt("Название списка", list.name);
     if (newTitle) {
       onEditTitle(list.id, newTitle);
-      console.log(list.id);
       axios
-        .put('https://todo-back-node.herokuapp.com/api/list/' + list.id, {
-          name: newTitle
+        .put("https://todo-back-node.herokuapp.com/api/list/" + list.id, {
+          name: newTitle,
         })
         .catch(() => {
-          alert('Не удалось обновить название списка');
+          alert("Не удалось обновить название списка");
         });
     }
   };
@@ -47,7 +46,7 @@ const Tasks = ({
           <h2>Задачи отсутствуют</h2>
         )}
         {list.tasks &&
-          list.tasks.map(task => (
+          list.tasks.map((task) => (
             <Task
               key={task.id}
               list={list}

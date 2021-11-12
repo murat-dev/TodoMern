@@ -23,15 +23,12 @@ function App() {
       });
   }, []);
 
-  React.useEffect(() => {
-    console.log(lists);
-  }, [lists]);
-
   const onAddList = (obj) => {
     const newList = [...lists, obj];
     setLists(newList);
   };
 
+  // Добавление задачи
   const onAddTask = (listId, taskObj) => {
     const newList = lists.map((item) => {
       if (item.id === listId) {
@@ -42,6 +39,7 @@ function App() {
     setLists(newList);
   };
 
+  // Изменения задачи
   const onEditTask = (listId, taskObj) => {
     const newTaskText = window.prompt("Текст задачи", taskObj.text);
 
@@ -70,6 +68,7 @@ function App() {
       });
   };
 
+  // Удаление задачи
   const onRemoveTask = (listId, taskId) => {
     if (window.confirm("Вы действительно хотите удалить задачу?")) {
       const newList = lists.map((item) => {
